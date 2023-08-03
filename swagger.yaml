@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: Misc-Service
+  description: Miscellaneous services.
+  version: 1.0.0
+
+servers:
+  - url: /misc/api/v1
+
+# Apply the security
+security:
+  - bearerAuth: []         # use the same name as above   
+
+paths:
+  /consumer:
+    get:
+      tags:
+        - Misc
+      summary: consumer types
+      description: Returns a list of consumer types
+      responses:
+        '200': # status code
+          description: A JSON array of consumer types
+
+  /identity:
+    get:
+      tags:
+        - Misc
+      summary: identity types
+      description: Returns a list of identity types
+      security:
+        - bearerAuth: []
+      responses:
+        '200': # status code
+          description: A JSON array of identity types
+
+  /config:
+    get:
+      tags:
+        - Misc
+      summary: app config
+      description: Returns a configuration value
+      parameters:
+        - in: query
+          name: configName
+          required: true
+          schema:
+            type: string
+          description: The name of the configuration             
+      responses:
+        '200': # status code
+          description: 
+
+  /industry:
+    get:
+      tags:
+        - Misc
+      summary: Industry types
+      description: Returns a list of Industry types
+      responses:
+        '200': # status code
+          description: A JSON array of Industry types
+
+
+
+  /income:
+    get:
+      tags:
+        - Misc
+      summary: Income types
+      description: Returns a list of Income types
+      responses:
+        '200': # status code
+          description: A JSON array of Industry types
+
+
+  /business:
+    get:
+      tags:
+        - Misc
+      summary: Business types
+      description: Returns a list of Business types
+      responses:
+        '200': # status code
+          description: A JSON array of Business types
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+

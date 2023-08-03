@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misc-service
+  namespace: wallet-be-dev
+  labels:
+      app: misc-service    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: misc-service
+  template:
+    metadata:
+      labels:
+        k8s-app: misc-service
+    spec:
+      serviceAccountName: wallet-service-sa
+      containers:
+        - name: misc-service
+          image: zargadevcontainerregistry.azurecr.io/misc-service:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8081
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8081
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            failureThreshold: 2
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - secretRef:
+                name: wallet-common-secret
+            - configMapRef:
+                name: wallet-common-config         
+      securityContext:
+        runAsUser: 1000

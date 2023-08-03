@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "target": "es2018",
+        "module": "CommonJS",
+        "resolveJsonModule": true,
+        "declaration": false,
+        "removeComments": false,
+        "sourceMap": true,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "Node",
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "include": [
+        "src"
+    ]
+}
